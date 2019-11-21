@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
+    int attempts = 1;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,7 +165,7 @@ public class Login extends javax.swing.JFrame {
         String password = jPassword.getText();
         String username = jtxtUserName.getText();
         
-        if (password.contains("psu!!!420") && (username.contains("kqd5425")))
+        if (password.contains("psu!!!420") && (username.contains("admin")))
         {
             jtxtUserName.setText(null);
             jPassword.setText(null);
@@ -174,12 +175,22 @@ public class Login extends javax.swing.JFrame {
             Info.setVisible(true);  
         }
         
-        else
+        else if (attempts ==5 && jPassword.getText() != "psu!!!420" && 
+                jtxtUserName.getText() != "admin")
         {
-            JOptionPane.showMessageDialog(null, "Invalid Username or Password",
-                   "Login Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bad Credentials: Attempts Exceeded",
+                   "Session Locked",JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+            
+        }
+        
+        else 
+        {
+            JOptionPane.showMessageDialog(null,"Number of attempts:  " 
+                    +attempts, "Bad Credentials",JOptionPane.ERROR_MESSAGE);
+            attempts++;
             jPassword.setText(null);
-            jtxtUserName.setText(null);
+            jtxtUserName.setText(null);           
         }
     }//GEN-LAST:event_jbtnLoginActionPerformed
 
